@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!---basic page needs-->
+    <meta charset="utf-8">
+    <title>PhysRepo</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--mobile specific metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!--script-->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/pace.min.js' %}"></script>
+    <!--favicons-->
+    <link rel="shortcut icon" href="{% static 'img/logo.svg' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/logo.svg' %}" type="image/x-icon">
+    <!--markdown form editor style-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <style>
+        pre:first-child code {
+            display: none;
+        }
+    </style>
+    <!--google adsense link-->
+    <script data-ad-client="ca-pub-9830295599870480" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body id="top">
+    {% block header %}
+    {% endblock header %}
+    {% block content %}
+    {% endblock content %}
+    <footer class="s-footer">
+        <div class="s-footer__main">
+            <div class="row">
+                <div class="col-two md-four mob-full s-footer__sitelinks">
+                    <h4>Quick Links</h4>
+                    <ul class="s-footer__linklist">
+                        <li><a href="{% url 'blog:home' %}">Home</a></li>
+                        <li><a href="{% url 'blog:about' %}">About</a></li>
+                        <li><a href="{% url 'blog:contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-two md-four mob-full s-footer__social">
+                    <h4>Social</h4>
+                    <ul class="s-footer__linklist">
+                        <li><a href="#0">Facebook</a></li>
+                        <li><a href="#0">Instagram</a></li>
+                        <li><a href="#0">Twitter</a></li>
+                        <li><a href="#0">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div class="col-two md-four mob-full s-footer__archives">
+                    <h4>Admin</h4>
+                    <ul class="s-footer__linklist">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'users:profile' %}" title="About">Profile</a></li>
+                            <li><a href="{% url 'users:logout' %}" title="About">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'users:login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-five md-full end s-footer__subscribe">
+                    <h4>Our Newsletter</h4>
+                    <p>Sit vel delectus amet officiis repudiandae est voluptatem. Tempora maxime provident nisi et fuga et enim exercitationem ipsam. Culpa consequatur occaecati.</p>
+                    <div class="subscribe-form">
+                        <form id="mc-form" class="group" novalidate="true">
+                            <input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
+                            <input type="submit" name="subscribe" value="Send">
+                            <label for="mc-email" class="subscribe-message"></label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="col-full">
+                    <div class="s-footer__copyright">
+                        <span>© Copyright <a href="{% url 'blog:home' %}">Physics Repo</a> 2020</span> 
+                        <span>Powered by <a href="https://digitalstudio.dev/">Digital Studio</a></span>
+                    </div>
+                    <div class="go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.content-markdown').each(function(){
+                var content = $(this).text()
+                var markedContent = marked(content)
+                console.log(markedContent)
+                $(this).html(markedContent)
+            })
+        })
+    </script>
+</body>
+
+</html>

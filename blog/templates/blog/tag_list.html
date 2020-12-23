@@ -1,0 +1,101 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block header %}
+<div class="s-pageheader">
+    <header class="header">
+        <div class="header__content row">
+            <div class="header__logo">
+                <a class="logo" href="{% url 'blog:home' %}">
+                    <img src="{% static 'images/logo.svg' %}" alt="Homepage">
+                </a>
+            </div> 
+            <ul class="header__social">
+                {% include "blog/social_links.html" %}
+            </ul> 
+            <a class="header__toggle-menu" href="" title="Menu"><span>Menu</span></a>
+            {% include "blog/nav.html" %}
+        </div>  
+    </header>
+</div>
+{% endblock header %}
+
+{% block content %}
+<section class="s-content">
+    <div class="row">
+        <div class="col-lg-12">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{  message.tags }} my-5" style="border-radius: 2rem;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="s-content__header col-full">
+            <h1 class="s-content__header-title">
+                {{ header }}
+            </h1>
+        </div> 
+    </div>
+    <div class="row masonry-wrap">
+        <div class="masonry">
+            <div class="grid-sizer"></div>
+            {% for post in posts %}
+            <article class="masonry__brick entry format-standard" data-aos="fade-up">
+                <div class="entry__thumb">
+                    <a href="{% url 'blog:post_detail' post.id %}" class="entry__thumb-link">
+                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }} Featured Image">
+                    </a>
+                </div>
+                <div class="entry__text">
+                    <div class="entry__header">
+                        <div class="entry__date">
+                            <a href="{% url 'blog:post_detail' post.id %}">{{ post.date_posted }} &middot; {{ post.read_time }} min read</a>
+                        </div>
+                        <h1 class="entry__title"><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></h1>
+                    </div>
+                    <div class="entry__excerpt">
+                        <p>
+                            {{ post.preview }}
+                        </p>
+                    </div>
+                </div>
+            </article> 
+            {% endfor %}
+        </div> 
+    </div> 
+    <div class="row">
+        <div class="col-full">
+            <nav class="pgn">
+                <ul>
+                    {% if is_paginated %}
+                        {% if page_obj.has_previous %}
+                            <li>
+                                <a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">Prev</a>
+                            </li>
+                        {% endif %}
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li>
+                                    <span class="pgn__num current">{{ num }}</span>
+                                </li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li>
+                                    <span class="pgn__num current">{{ num }}</span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li>
+                                <a class="pgn__next" href="?page={{ page_obj.next_page_number }}" aria-label="Next">Next</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+{% endblock content %}

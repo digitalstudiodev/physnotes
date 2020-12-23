@@ -1,0 +1,90 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block header %}
+<div class="s-pageheader">
+    <header class="header">
+        <div class="header__content row">
+            <div class="header__logo">
+                <a class="logo" href="{% url 'blog:home' %}">
+                    <img src="{% static 'images/logo.svg' %}" alt="Homepage">
+                </a>
+            </div> 
+            <ul class="header__social">
+                {% include "blog/social_links.html" %}
+            </ul> 
+            <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+            {% include "blog/nav.html" %}
+        </div>  
+    </header>
+</div>
+{% endblock header %}
+
+{% block content %}
+<section class="s-content s-content--narrow s-content--no-padding-bottom">
+    <article class="row format-standard">
+        <div class="s-content__header col-full">
+            <h3 class="s-content__header-title">Article</h3>
+            <form method="POST" class="uniForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4">New Article</legend>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ form.title|as_crispy_field }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ form.read_time|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ form.preview|as_crispy_field }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ form.featured_image|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {{ form.content|as_crispy_field }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label>Tags (Choose 4 Max)</label>
+                                    {% for value in form.tag %}
+                                    <div class="form-check bg-gray text-dark lift rounded-pill my-2 px-4 py-2 font-weight-bold">
+                                        <label class="form-check-label" for="gridCheck">
+                                            {{ value }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-danger btn-marketing btn-block rounded-pill mt-4" type="submit">Post</button>
+                        </div>
+            </form>
+        </div> 
+    </div>
+</section>
+<!--markdown form editor-->
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+document.getElementById("id_content").required = false;
+window.onload = function() {
+    var simplemde = new SimpleMDE(
+        {
+            autofocus: true,
+            element: document.getElementById("id_content"),
+            spellChecker: true,
+            toolbar: false,
+            forceSync: true
+        }
+    )
+};
+</script>
+{% endblock %}

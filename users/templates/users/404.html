@@ -1,0 +1,35 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block header %}
+<div class="s-pageheader">
+    <header class="header">
+        <div class="header__content row">
+            <div class="header__logo">
+                <a class="logo" href="{% url 'blog:home' %}">
+                    <img src="{% static 'images/logo.svg' %}" alt="Homepage">
+                </a>
+            </div> 
+            <ul class="header__social">
+                {% include "blog/social_links.html" %}
+            </ul> 
+            <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
+            {% include "blog/nav.html" %}
+        </div>  
+    </header>
+</div>
+{% endblock header %}
+
+{% block content %}
+<section class="s-content s-content--narrow">
+    <div class="row">
+        <div class="s-content__header col-full">
+            <h1 class="s-content__header-title">
+              <h1>Invalid Request</h1>
+              <p>Please complete the contact form and let us know about the error.</p>
+            </h1>
+        </div> 
+    </div> 
+</section>
+{% endblock %}
