@@ -117,29 +117,19 @@
         <div class="col-full">
             <nav class="pgn">
                 <ul>
-                    {% if page_obj.is_paginated %}
                         {% if page_obj.has_previous %}
                             <li>
                                 <a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">Prev</a>
                             </li>
                         {% endif %}
-                        {% for num in page_obj.paginator.page_range %}
-                            {% if page_obj.number == num %}
-                                <li>
-                                    <span class="pgn__num current">{{ num }}</span>
-                                </li>
-                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                                <li>
-                                    <span class="pgn__num current">{{ num }}</span>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
+                            <li>
+                                <span class="pgn__num current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                            </li>
                         {% if page_obj.has_next %}
                             <li>
                                 <a class="pgn__next" href="?page={{ page_obj.next_page_number }}" aria-label="Next">Next</a>
                             </li>
                         {% endif %}
-                    {% endif %}
                 </ul>
             </nav>
         </div>
