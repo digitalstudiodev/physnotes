@@ -64,7 +64,6 @@ class PostListView(ListView):
     template_name = 'blog/blog.html'  
     context_object_name = 'posts'
     ordering = ['-date_posted']
-    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
@@ -83,19 +82,11 @@ class PostListView(ListView):
             for t in obj.tag:
                 if t == "Popular":
                     popular.append(obj)
-        #paginating internship objects
-        paginator = Paginator(Post.objects.all(), 5)
-        #grabbing page number
-        page_number = self.request.GET.get('page')
-        #paginated object
-        page_obj = paginator.get_page(page_number)
-        #exporting context
         context = {
             'popular': popular,
             'posts': Post.objects.all(),
             'featured': featured,
             'recent': recent,
-            'page_obj': page_obj
         } 
         return context
 

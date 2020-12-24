@@ -113,27 +113,6 @@
             {% endfor %}
         </div> 
     </div> 
-    <div class="row">
-        <div class="col-full">
-            <nav class="pgn">
-                <ul>
-                        {% if page_obj.has_previous %}
-                            <li>
-                                <a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">Prev</a>
-                            </li>
-                        {% endif %}
-                            <li>
-                                <span class="pgn__num current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                            </li>
-                        {% if page_obj.has_next %}
-                            <li>
-                                <a class="pgn__next" href="?page={{ page_obj.next_page_number }}" aria-label="Next">Next</a>
-                            </li>
-                        {% endif %}
-                </ul>
-            </nav>
-        </div>
-    </div>
 </section>
 <section class="s-extra">
     <div class="row top">
