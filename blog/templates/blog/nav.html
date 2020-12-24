@@ -16,7 +16,7 @@
                 <li><a href="{% url 'blog:tag' tag='Astronomy' %}">Astronomy</a></li>
             </ul>
         </li>
-        <li><a href="{% url 'blog:about' %}" title="About">About</a></li>
+        <!--<li><a href="{% url 'blog:about' %}" title="About">About</a></li>-->
         <li><a href="{% url 'blog:contact' %}" title="Contact">Contact</a></li>
         {% if user.is_authenticated %}
         <li><a href="{% url 'users:profile' %}" title="About">Profile</a></li>
