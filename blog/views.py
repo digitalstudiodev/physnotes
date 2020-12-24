@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from django import forms
+from django.core.paginator import Paginator
 
 def about(request):
     return render(request, "blog/about.html")
@@ -82,11 +83,19 @@ class PostListView(ListView):
             for t in obj.tag:
                 if t == "Popular":
                     popular.append(obj)
+        #paginating internship objects
+        paginator = Paginator(Post.objects.all()., 5)
+        #grabbing page number
+        page_number = self.request.GET.get('page')
+        #paginated object
+        page_obj = paginator.get_page(page_number)
+        #exporting context
         context = {
             'popular': popular,
             'posts': Post.objects.all(),
             'featured': featured,
             'recent': recent,
+            'page_obj': page_obj
         } 
         return context
 
