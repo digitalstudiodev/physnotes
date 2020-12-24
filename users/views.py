@@ -73,7 +73,7 @@ def login_view(request):
                 return redirect('users:profile')
             elif user and user.approved == 'NO':
                 messages.info(request, f'Thanks for registering, but you are not approved to access to this application. If you wish contribute, contact Digital Studio.')
-                return redirect('blog:feed')
+                return redirect('blog:home')
     else:
         form = LoginForm()
     context['form'] = form
