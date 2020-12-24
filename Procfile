@@ -1,1 +1,1 @@
-web: gunicorn techat.wsgi
+web: gunicorn superphysics.wsgi
