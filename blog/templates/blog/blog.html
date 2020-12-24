@@ -117,7 +117,6 @@
         <div class="col-full">
             <nav class="pgn">
                 <ul>
-                    {% if is_paginated %}
                         {% if page_obj.has_previous %}
                             <li>
                                 <a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">Prev</a>
@@ -139,7 +138,6 @@
                                 <a class="pgn__next" href="?page={{ page_obj.next_page_number }}" aria-label="Next">Next</a>
                             </li>
                         {% endif %}
-                    {% endif %}
                 </ul>
             </nav>
         </div>
