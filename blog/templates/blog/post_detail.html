@@ -76,4 +76,14 @@
         </div>
     </article>
 </section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.content-markdown').each(function(){
+            var content = $(this).text()
+            var markedContent = marked(content)
+            console.log(markedContent)
+            $(this).html(markedContent)
+        })
+    })
+</script>
 {% endblock %}
