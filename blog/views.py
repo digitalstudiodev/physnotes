@@ -84,7 +84,7 @@ class PostListView(ListView):
                 if t == "Popular":
                     popular.append(obj)
         #paginating internship objects
-        paginator = Paginator(Post.objects.all()., 5)
+        paginator = Paginator(Post.objects.all(), 5)
         #grabbing page number
         page_number = self.request.GET.get('page')
         #paginated object
