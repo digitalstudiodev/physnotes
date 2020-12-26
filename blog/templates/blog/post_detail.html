@@ -54,6 +54,9 @@
             </p>
             <div class="content-markdown text-dark">
                 {{ object.content }}
+                {% if object.note %}
+                    <iframe src="{{ object.note.url }}" width="100%" height="500px"></iframe>
+                {% endif %}
             </div>
             <hr class="my-5" />
             {% if object.author == request.user %}

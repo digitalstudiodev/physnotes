@@ -39,11 +39,16 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     {{ form.preview|as_crispy_field }}
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-6">
                                     {{ form.featured_image|as_crispy_field }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ form.note|as_crispy_field }}
                                 </div>
                             </div>
                             <div class="row">

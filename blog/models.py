@@ -16,6 +16,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     tag = MultiSelectField(max_length=100, choices=TAG_OPTIONS, default="Featured", null=False, blank=False, max_choices=4)
     featured_image = models.ImageField(default='default.png', upload_to='blog_pics', verbose_name="Featured Image")
+    note = models.FileField(default=None, upload_to='notes', verbose_name="Notes", null=True, blank=True)
 
     def __str__(self):
         return self.title
