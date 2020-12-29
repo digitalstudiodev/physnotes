@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =  os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['https://physicsrepo.herokuapp.com/']
+ALLOWED_HOSTS = ['https://physicsrepo.herokuapp.com/', 'www.physnotes.net/']
 
 
 # Application definition
