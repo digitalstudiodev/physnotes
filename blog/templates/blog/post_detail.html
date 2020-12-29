@@ -57,8 +57,11 @@
                 {{ object.content }}
             </div>
             {% if object.note %}
-                <div class="note">
+                <div id="note">
                 </div>
+                <script>
+                    PDFObject.embed("{{ object.note.url }}", "#note");
+                </script>
                 <a href="{{ object.note.url }}" target="_blank">Download PDF</a>
             {% else %}
                 No notes currently
