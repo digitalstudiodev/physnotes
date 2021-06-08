@@ -3,162 +3,23 @@
 {% load static %}
 
 {% block header %}
-<section class="s-pageheader s-pageheader--home">
-    <header class="header">
-        <div class="header__content row">
-            <div class="header__logo">
-                <a class="logo" href="{% url 'blog:home' %}">
-                    <img src="{% static 'images/logo.svg' %}" alt="Logo">
-                </a>
-            </div> 
-            <ul class="header__social">
-                {% include "blog/social_links.html" %}
-            </ul> 
-            <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
-            {% include "blog/nav.html" %}
-        </div> 
-    </header> 
-    <div class="pageheader-content row">
-        <div class="col-full">
-            <div class="featured">
-                <div class="featured__column featured__column--big">
-                    {% for post in featured %}
-                    <div class="entry" style="background-image:url({{ post.featured_image.url }});">
-                        <div class="entry__content">
-                            <span class="entry__category">
-                                <a href="{% url 'blog:post_detail' post.id %}">{{ post.tag }}</a>
-                            </span>
-                            <h1>
-                                <a href="{% url 'blog:post_detail' post.id %}" title="{{ post.title }}">{{ post.title }}</a>
-                            </h1>
-                            <div class="entry__info">
-                                <a href="{% url 'blog:post_detail' post.id %}" class="entry__profile-pic">
-                                    <img class="avatar" src="{{ post.author.profile.image.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }} Profile Image">
-                                </a>
-                                <ul class="entry__meta">
-                                    <li><a href="{% url 'blog:author' post.author.id %}">{{ post.author.first_name }} {{ post.author.last_name }}</a></li>
-                                    <li>{{ post.date_posted }} &middot; {{ post.read_time }} min read</li>
-                                </ul>
-                            </div>
-                        </div> 
-                    </div> 
-                    {% endfor %}
-                </div> 
-                <div class="featured__column featured__column--small">
-                    {% for post in recent %}
-                    <div class="entry" style="background-image:url({{ post.featured_image.url }});">
-                        <div class="entry__content">
-                            <span class="entry__category">
-                                <a href="{% url 'blog:post_detail' post.id %}">{{ post.tag }}</a>
-                            </span>
-                            <h1>
-                                <a href="{% url 'blog:post_detail' post.id %}" title="{{ post.title }}">{{ post.title }}</a>
-                            </h1>
-                            <div class="entry__info">
-                                <a href="{% url 'blog:post_detail' post.id %}" class="entry__profile-pic">
-                                    <img class="avatar" src="{{ post.author.profile.image.url }}" alt="{{ post.author.first_name }} {{ post.author.last_name }} Profile Image">
-                                </a>
-                                <ul class="entry__meta">
-                                    <li><a href="{% url 'blog:author' post.author.id %}">{{ post.author.first_name }} {{ post.author.last_name }}</a></li>
-                                    <li>{{ post.date_posted }} &middot; {{ post.read_time }} min read</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> 
-                    {% endfor %}
-                </div> 
-            </div> 
-        </div> 
+<header class="py-5">
+    <div class="container px-lg-5">
+        <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+            <div class="m-4 m-lg-5">
+                <h1 class="display-5 fw-bold">Welcome to PhysNotes</h1>
+                <p class="fs-5">
+                    We aim to create and provide a library of easy to understand material with simple explanations to many difficult topics in physics. 
+                    Whether you are trying to do well in a college level physics course or just looking to expand your physics knowledge, you can browse and watch our collection of material for free!
+                </p>
+                <a class="btn btn-danger btn-lg rounded-pill shadow px-3" href="{% url 'blog:categories' %}">Explore</a>
+            </div>
+        </div>
     </div>
-</section>
+</header>
+<!--features-->
+{% include 'blog/about_tags.html' %}
 {% endblock header %}
 
 {% block content %}
-<section class="s-content">
-    <div class="row">
-        <div class="col-lg-12">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{  message.tags }} my-5" style="border-radius: 2rem;">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-    <div class="row masonry-wrap">
-        <div class="masonry">
-            <div class="grid-sizer"></div>
-            {% for post in posts %}
-            <article class="masonry__brick entry format-standard" data-aos="fade-up">
-                <div class="entry__thumb">
-                    <a href="{% url 'blog:post_detail' post.id %}" class="entry__thumb-link">
-                        <img src="{{ post.featured_image.url }}" alt="{{ post.title }} Featured Image">
-                    </a>
-                </div>
-                <div class="entry__text">
-                    <div class="entry__header">
-                        <div class="entry__date">
-                            <a href="{% url 'blog:post_detail' post.id %}">{{ post.date_posted }} &middot; {{ post.read_time }} min read</a>
-                        </div>
-                        <h1 class="entry__title"><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></h1>
-                    </div>
-                    <div class="entry__excerpt">
-                        <p>
-                            {{ post.preview }}
-                        </p>
-                    </div>
-                </div>
-            </article> 
-            {% endfor %}
-        </div> 
-    </div> 
-</section>
-<section class="s-extra">
-    <div class="row top">
-        <div class="col-eight md-six tab-full popular">
-            <h3>Popular</h3>
-            <div class="block-1-2 block-m-full popular__posts">
-                {% for post in popular %}
-                <article class="col-block popular__post">
-                    <a href="{% url 'blog:post_detail' post.id %}" class="popular__thumb">
-                        <img src="{{ post.featured_image.url }}" alt="">
-                    </a>
-                    <h5><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></h5>
-                    <section class="popular__meta">
-                            <span class="popular__author"><span>By</span> {{ post.author.first_name }} {{ post.author.last_name }}</span>
-                        <span class="popular__date"><span>on</span> <time datetime="{{ post.date_posted.year }}-{{ post.date_posted.month }}-{{ post.date_posted.day }}">{{ post.date_posted }}</time>&middot; {{ post.read_time }} min read</span>
-                    </section>
-                </article>
-                {% endfor %}
-            </div> 
-        </div> 
-        <div class="col-four md-six tab-full about">
-            <h3>About Physics Notes</h3>
-            <p>
-                Physics Notes is a repository of notes on fundamental and modern physics topics. Each post focuses on an 
-                individual concept and tags are used to group related posts.
-            </p>
-            <ul class="about__social">
-                {% include "blog/social_links.html" %}
-            </ul> 
-        </div> 
-    </div> 
-    <div class="row bottom tags-wrap">
-        <div class="col-full tags">
-            <h3>Tags</h3>
-            <div class="tagcloud">
-                <a href="{% url 'blog:tag' tag='Classical-Mechanics' %}">Classical Mechanics</a>
-                <a href="{% url 'blog:tag' tag='Quantum-Mechanics' %}">Quantum Mechanics</a>
-                <a href="{% url 'blog:tag' tag='Nuclear-Physics' %}">Nuclear Physics</a>
-                <a href="{% url 'blog:tag' tag='Optics' %}">Optics</a>
-                <a href="{% url 'blog:tag' tag='Fluids' %}">Fluids</a>
-                <a href="{% url 'blog:tag' tag='Linear-Algebra' %}">Linear Algebra</a>
-                <a href="{% url 'blog:tag' tag='Special-Relativity' %}">Special Relativity</a>
-                <a href="{% url 'blog:tag' tag='Electrodynamics' %}">Electrodynamics</a>
-                <a href="{% url 'blog:tag' tag='Astronomy' %}">Astronomy</a>
-            </div> 
-        </div> 
-    </div> 
-</section>
 {% endblock content %}

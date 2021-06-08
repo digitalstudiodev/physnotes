@@ -1,0 +1,24 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="col-lg-8 m-auto">
+            <ul class="list-group list-group-flush">
+                {% for cat in categories %}
+                    <li class="list-group-item">
+                        <a href="{% url 'blog:category' cat %}" class="text-dark">
+                            {{ cat }}
+                        </a>
+                    </li>
+                {% endfor %}
+              </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

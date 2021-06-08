@@ -3,48 +3,28 @@
 {% load static %}
 
 {% block header %}
-<div class="s-pageheader">
-    <header class="header">
-        <div class="header__content row">
-            <div class="header__logo">
-                <a class="logo" href="{% url 'blog:home' %}">
-                    <img src="{% static 'images/logo.svg' %}" alt="Homepage">
-                </a>
-            </div> 
-            <ul class="header__social">
-                {% include "blog/social_links.html" %}
-            </ul> 
-            <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
-            {% include "blog/nav.html" %}
-        </div>  
-    </header>
-</div>
 {% endblock header %}
 
 {% block content %}
-<section class="s-content s-content--narrow">
-    <div class="row">
-        <div class="s-content__header col-full">
-            <h1 class="s-content__header-title">
-                Contact Us
-            </h1>
-        </div> 
-        <div class="col-full s-content__main">
+<section class="py-5">
+    <div class="container">
+        <div class="col-lg-6 m-auto">
+            <h1>Contact Us</h1>
             <form name="cForm" id="cForm" method="post" action="https://formspree.io/f/xnqoovrj">
                 <fieldset>
                     <div class="form-field">
-                        <input name="cName" type="text" id="cName" class="full-width" placeholder="Your Name" value="">
+                        <input name="cName" type="text" id="cName" class="mb-3" placeholder="Your Name" value="">
                     </div>
                     <div class="form-field">
-                        <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="Your Email" value="">
+                        <input name="cEmail" type="text" id="cEmail" class="mb-3" placeholder="Your Email" value="">
                     </div>
                     <div class="form-field">
-                        <input name="cWebsite" type="text" id="cWebsite" class="full-width" placeholder="Website"  value="">
+                        <input name="cWebsite" type="text" id="cWebsite" class="mb-3" placeholder="Website"  value="">
                     </div>
                     <div class="message form-field">
-                        <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Your Message" ></textarea>
+                        <textarea name="cMessage" id="cMessage" class="mb-3" placeholder="Your Message" ></textarea>
                     </div>
-                    <button type="submit" class="submit btn btn--primary full-width">Submit</button>
+                    <button type="submit" class="submit btn btn-dark rounded-pill">Submit</button>
                 </fieldset>
             </form> 
         </div> 

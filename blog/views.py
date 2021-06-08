@@ -7,88 +7,39 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post
 from django import forms
 from django.core.paginator import Paginator
+from .dict_lib import TAG_OPTIONS
+
+def home(request):
+    return render(request, "blog/blog.html")
 
 def about(request):
     return render(request, "blog/about.html")
 
+def categories(request):
+    # convert tuple to list of categories
+    cat = []
+    for i in TAG_OPTIONS:
+        cat.append(i[0])
+    context = {
+        'categories': cat
+    }
+    return render(request, "blog/cat.html", context)
+
+
+def category(request, category):
+    list_objs = []
+    for obj in Post.objects.all():
+        for tagg in list(obj.tag):
+            if tagg == category:
+                list_objs.append(obj)
+    context = {
+        'items': list_objs,
+        'category': category
+    }
+    return render(request, "blog/cats.html", context)
+
 def contact(request):
     return render(request, "blog/contact.html")
-
-class AuthorListView(ListView):
-    model = Post
-    template_name = 'blog/tag_list.html'  
-    context_object_name = 'posts'
-    ordering = ['-date_posted']
-    paginate_by = 6
-
-    def get_context_data(self, **kwargs):
-        context = super(AuthorListView, self).get_context_data(**kwargs)
-        user = self.kwargs["pk"]
-        author = User.objects.all().filter(pk=user)[0]
-        author_name = str(author.first_name) + " " + str(author.last_name)
-        list_objs = []
-        for obj in Post.objects.all():
-            if obj.author == author:
-                list_objs.append(obj)
-
-        context = {
-            'posts': list_objs,
-            'header': author_name,
-        }
-        return context
-
-class TagListView(ListView):
-    model = Post
-    template_name = 'blog/tag_list.html'  
-    context_object_name = 'posts'
-    ordering = ['-date_posted']
-    paginate_by = 6
-
-    def get_context_data(self, **kwargs):
-        context = super(TagListView, self).get_context_data(**kwargs)
-        tag = self.kwargs["tag"]
-        list_objs = []
-        for obj in Post.objects.all():
-            for t in obj.tag:
-                if t == tag:
-                    list_objs.append(obj)
-
-        context = {
-            'posts': list_objs,
-            'header': tag,
-        }
-        return context
-
-class PostListView(ListView):
-    model = Post
-    template_name = 'blog/blog.html'  
-    context_object_name = 'posts'
-    ordering = ['-date_posted']
-
-    def get_context_data(self, **kwargs):
-        context = super(PostListView, self).get_context_data(**kwargs)
-        featured = []
-        for obj in Post.objects.all():
-            for t in obj.tag:
-                if t == "Featured":
-                    featured.append(obj)
-        recent = []
-        for obj in Post.objects.all():
-            for t in obj.tag:
-                if t == "Recent":
-                    recent.append(obj)
-        popular = []
-        for obj in Post.objects.all():
-            for t in obj.tag:
-                if t == "Popular":
-                    popular.append(obj)
-        context = {
-            'popular': popular,
-            'posts': Post.objects.all(),
-            'featured': featured,
-            'recent': recent,
-        } 
-        return context
 
 class PostDetailView(DetailView):
     model = Post

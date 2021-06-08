@@ -3,22 +3,6 @@
 {% load static %}
 
 {% block header %}
-<div class="s-pageheader">
-    <header class="header">
-        <div class="header__content row">
-            <div class="header__logo">
-                <a class="logo" href="{% url 'blog:home' %}">
-                    <img src="{% static 'images/logo.svg' %}" alt="Homepage">
-                </a>
-            </div> 
-            <ul class="header__social">
-                {% include "blog/social_links.html" %}
-            </ul> 
-            <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
-            {% include "blog/nav.html" %}
-        </div>  
-    </header>
-</div>
 {% endblock header %}
 
 {% block content %}

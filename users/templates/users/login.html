@@ -3,33 +3,12 @@
 {% load static %}
 
 {% block header %}
-<div class="s-pageheader">
-    <header class="header">
-        <div class="header__content row">
-            <div class="header__logo">
-                <a class="logo" href="{% url 'blog:home' %}">
-                    <img src="{% static 'images/logo.svg' %}" alt="Homepage">
-                </a>
-            </div> 
-            <ul class="header__social">
-                {% include "blog/social_links.html" %}
-            </ul> 
-            <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
-            {% include "blog/nav.html" %}
-        </div>  
-    </header>
-</div>
 {% endblock header %}
 
 {% block content %}
-<section class="s-content s-content--narrow">
+<section class="py-5">
     <div class="row">
-        <div class="s-content__header col-full">
-            <h1 class="s-content__header-title">
-                Login
-            </h1>
-        </div> 
-        <div class="col-full s-content__main">
+        <div class="col-lg-6 m-auto">
             <h1>Login</h1>
             <p>
                 If you don't already have an account please <a href="{% url 'users:register' %}">register</a>
@@ -37,8 +16,10 @@
             <form method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <button class="btn btn-marketing btn-block rounded-pill mt-4" type="submit">Login</button>
-                <a class="text-dark ml-2" href="{% url 'password_reset' %}">Forgot Password</a>
+                <div class="my-5">
+                    <button class="btn btn-marketing btn-dark rounded-pill" type="submit">Login</button>
+                    <a class="text-dark ml-3" href="{% url 'password_reset' %}">Forgot Password</a>
+                </div>
             </form>
         </div> 
     </div> 

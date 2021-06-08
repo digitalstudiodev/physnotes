@@ -1,0 +1,37 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block header %}
+<header class="py-5 bg-light border-bottom mb-4">
+    <div class="container">
+        <div class="text-center my-5">
+            <h1 class="fw-bolder">{{ category }}</h1>
+        </div>
+    </div>
+</header>
+{% endblock header %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            {% for item in items %}
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <a href="{% url 'blog:post_detail' item.id %}">
+                        <img class="card-img-top" src="{{ item.featured_image.url }}" alt="Featured Image" />
+                    </a>
+                    <div class="card-body">
+                        <div class="small text-muted">{{ item.date_posted }}</div>
+                        <h2 class="card-title">{{ item.title }}</h2>
+                        <p class="card-text">{{ item.preview }}</p>
+                        <a class="btn btn-danger rounded-pill shadow" href="{% url 'blog:post_detail' item.id %}">Learn more →</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
