@@ -6,14 +6,13 @@
 {% endblock header %}
 
 {% block content %}
-<section class="s-content s-content--narrow s-content--no-padding-bottom">
+<section class="py-5">
     <article class="row format-standard">
-        <div class="s-content__header col-full">
-            <h3 class="s-content__header-title">Article</h3>
+        <div class="col-lg-10 m-auto">
+            <h3>Article</h3>
             <form method="POST" class="uniForm" enctype="multipart/form-data">
                         {% csrf_token %}
                         <fieldset class="form-group">
-                            <legend class="border-bottom mb-4">New Article</legend>
                             <div class="row">
                                 <div class="col-lg-6">
                                     {{ form.title|as_crispy_field }}
@@ -54,7 +53,8 @@
                             </div>
                         </fieldset>
                         <div class="form-group">
-                            <button class="btn btn-danger btn-marketing btn-block rounded-pill mt-4" type="submit">Post</button>
+                            <button class="btn btn-danger rounded-pill mt-4" type="submit">Post</button>
+                            <a class="btn btn-dark rounded-pill mt-4" href="{% url 'users:profile' %}">Back to Profile</a>
                         </div>
             </form>
         </div> 

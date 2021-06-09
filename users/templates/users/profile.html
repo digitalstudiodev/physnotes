@@ -3,34 +3,16 @@
 {% load static %}
 
 {% block header %}
-<div class="s-pageheader">
-    <header class="header">
-        <div class="header__content row">
-            <div class="header__logo">
-                <a class="logo" href="{% url 'blog:home' %}">
-                    <img src="{% static 'images/logo.svg' %}" alt="Homepage">
-                </a>
-            </div> 
-            <ul class="header__social">
-                {% include "blog/social_links.html" %}
-            </ul> 
-            <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
-            {% include "blog/nav.html" %}
-        </div>  
-    </header>
-</div>
 {% endblock header %}
 
 {% block content %}
-<section class="s-content s-content--narrow">
+<section class="py-5">
     {% include "users/messages.html" %}
     <div class="row">
-        <div class="s-content__header col-full">
-            <h1 class="s-content__header-title">
-                <h1>Profile</h1>
-            </h1>
+        <div class="col-lg-6 m-auto">
+            <h1 class="text-center font-weight-bold">Profile</h1>
         </div> 
-        <div class="col-full s-content__main">
+        <div class="col-lg-10 m-auto">
             <h3>Options</h3>
             <hr />
             <div class="d-flex mb-4">

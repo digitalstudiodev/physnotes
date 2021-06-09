@@ -6,14 +6,10 @@
 {% endblock header %}
 
 {% block content %}
-<section class="s-content s-content--narrow">
+<section class="py-5">
     <div class="row">
-        <div class="s-content__header col-full">
-            <h1 class="s-content__header-title">
-                Delete
-            </h1>
-        </div> 
-        <div class="col-full s-content__main">
+        <div class="col-lg-6">
+            <h1>Delete</h1>
             <form method="POST" class="uniForm">
                 {% csrf_token %}
                 <fieldset class="form-group">
