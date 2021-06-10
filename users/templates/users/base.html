@@ -60,7 +60,18 @@
 
     <!-- Footer-->
     <footer class="py-5 bg-dark">
-        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; PhysNotes 2020. Developed by <a href="https://digitalstudio.dev/" class="text-white">Digital Studio</a></p></div>
+        <div class="container">
+            <p class="m-0 text-center text-white">
+                Copyright &copy; PhysNotes 2020. Developed by 
+                <a href="https://digitalstudio.dev/" class="text-white">Digital Studio</a>
+            </p>
+            <p class="m-0 text-center text-white">
+                Admin 
+                {% if not request.user.is_authenticated %}
+                    <a href="{% url 'users:login' %}" class="text-white">Login</a>
+                {% endif %}
+            </p>
+        </div>
     </footer>
 
     <!-- Bootstrap core JS-->
