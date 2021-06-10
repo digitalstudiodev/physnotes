@@ -36,10 +36,30 @@
                     PDFObject.embed("{{ object.note.url }}", "#note");
                 </script>
                 <a href="{{ object.note.url }}" target="_blank">Download PDF</a>
-            {% else %}
-                No notes currently
             {% endif %}
             <hr class="my-5" />
+            <div class="text-dark">
+                <h2>Comments</h2>
+                {% if comments %}
+                    {% for comment in comments %}
+                    <div class="col-lg-6">
+                        <div class="card my-3">
+                            <div class="card-body">
+                                <h3>{{ comment.user }}</h3>
+                                <p>{{ comment.comment }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <a class="btn btn-danger rounded-pill my-3" href="{% url 'blog:add_comment' object.id %}">Add Comment</a>
+                <hr class="my-5" />
+                {% else %}
+                    Be the first to comment. 
+                    <br>
+                    <a class="btn btn-danger rounded-pill my-3" href="{% url 'blog:add_comment' object.id %}">Add Comment</a>
+                    <hr class="my-5" />
+                {% endif %}
+            </div>
             {% if object.author == request.user %}
             <div class="row">
                 <div class="col-lg-12">

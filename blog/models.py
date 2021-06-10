@@ -17,7 +17,6 @@ class Post(models.Model):
     tag = MultiSelectField(max_length=100, choices=TAG_OPTIONS, default="Featured", null=False, blank=False, max_choices=4)
     featured_image = models.ImageField(default='default.png', upload_to='blog_pics', verbose_name="Featured Image")
     note = models.FileField(default=None, upload_to='notes', verbose_name="Notes", null=True, blank=True, help_text="(Optional)")
-    comments = models.ForeignKey('Comment', default=None, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -26,9 +25,13 @@ class Post(models.Model):
         return reverse('blog:post_detail', kwargs={'pk': self.pk})
 
 class Comment(models.Model):
-    user = models.CharField(max_length=100, default="")
-    comment = models.TextField(default="", verbose_name="Content")
+    user = models.CharField(max_length=100, default="", verbose_name="Name")
+    comment = models.TextField(default="", verbose_name="Comment")
     date_posted = models.DateTimeField(default=timezone.now)
+    post = models.ForeignKey('Post', default=None, on_delete=models.CASCADE, null=False, blank=False)
 
     def __str__(self):
         return self.user
+
+    def get_absolute_url(self):
+        return reverse('blog:post_detail', kwargs={'pk': self.post.pk})
