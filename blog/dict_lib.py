@@ -1,7 +1,4 @@
 TAG_OPTIONS = (
-    ("Featured","Featured"),
-    ("Recent","Recent"),
-    ("Popular","Popular"),
     ("Quantum-Mechanics","Quantum-Mechanics"),
     ("Nuclear-Physics","Nuclear-Physics"),
     ("Optics","Optics"),
