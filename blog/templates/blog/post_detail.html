@@ -11,17 +11,14 @@
     <article class="container">
         <div class="col-lg-10 m-auto overflow-auto">
             <h1 class="font-weight-bold text-center">{{ object.title }}</h1>
-            <ul>
-                <li class="list-item">{{ object.date_posted }} &middot; {{ object.read_time }} minutes</li>
-                <li class="list-item">
-                    Also Available In
-                    {% for tag in object.tag %}
-                        <a href="{% url 'blog:category' tag %}">{{ tag }}</a>
-                    {% endfor %}
-                </li>
-            </ul>
+            <p>
+                Also Available In
+                {% for tag in object.tag %}
+                    <a href="{% url 'blog:category' tag %}">{{ tag }}</a>
+                {% endfor %}
+            </p>
 
-            <img src="{{ object.featured_image.url }}" class="img-fluid m-auto" width="850px" height="350px" alt="{{ object.title }} Featured Image" >
+            <img src="{{ object.featured_image.url }}" class="img-fluid m-auto" max-width="850px" max-height="350px" alt="{{ object.title }} Featured Image" >
             
             <p class="lead">
                 {{ object.preview }}            
@@ -70,10 +67,11 @@
             <hr class="my-5" />
             {% endif %}
             <p>
+                Also Available In
                 {% for tag in object.tag %}
                     <a href="{% url 'blog:category' tag %}">{{ tag }}</a>
                 {% endfor %}
-            </p> 
+            </p>
         </div>
     </article>
 </section>
