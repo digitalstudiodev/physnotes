@@ -65,7 +65,7 @@
                 Copyright &copy; PhysNotes 2020. Developed by 
                 <a href="https://digitalstudio.dev/" class="text-white">Digital Studio</a>
             </p>
-            <p class="m-0 text-center text-white">
+            <p class="m-0 text-center text-muted">
                 Admin 
                 {% if not request.user.is_authenticated %}
                     <a href="{% url 'users:login' %}" class="text-white">Login</a>
