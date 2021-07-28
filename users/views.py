@@ -7,12 +7,12 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import User
 
-def invalid_view(request):
-    messages.warning(request,f'Invalid Request.')
+def invalid_error(request, code):
+    messages.warning(request, f'Invalid Request {code}')
     return render(request, 'users/404.html')
 
-def invalid_error(request, code):
-    messages.warning(request,f'Invalid Request: {code}.')
+def invalid_view(request):
+    messages.warning(request, f'Invalid Request')
     return render(request, 'users/404.html')
 
 def register(request):
