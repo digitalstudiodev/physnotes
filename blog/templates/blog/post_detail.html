@@ -11,16 +11,16 @@
     <article class="container overflow-auto">
         <div class="col-lg-8 m-auto">
             <h1 class="font-weight-bold text-center">{{ object.title }}</h1>
-            <p>
+            <p class="my-5">
                 Also Available In
                 {% for tag in object.tag %}
                     <a href="{% url 'blog:category' tag %}">{{ tag }}</a>
                 {% endfor %}
             </p>
 
-            <img src="{{ object.featured_image.url }}" class="img-fluid m-auto" max-width="850px" max-height="350px" alt="{{ object.title }} Featured Image" >
+            <img src="{{ object.featured_image.url }}" class="img-fluid m-auto mb-5" max-width="850px" max-height="350px" alt="{{ object.title }} Featured Image" >
             
-            <p class="lead">
+            <p class="lead font-weight-bold">
                 {{ object.preview }}            
             </p>
             <div class="content-markdown text-dark">

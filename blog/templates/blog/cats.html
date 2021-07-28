@@ -23,7 +23,6 @@
                         <img class="card-img-top" src="{{ item.featured_image.url }}" alt="Featured Image" />
                     </a>
                     <div class="card-body">
-                        <div class="small text-muted">{{ item.date_posted }}</div>
                         <h2 class="card-title">{{ item.title }}</h2>
                         <p class="card-text">{{ item.preview }}</p>
                         <a class="btn btn-danger rounded-pill shadow" href="{% url 'blog:post_detail' item.id %}">Learn more →</a>
