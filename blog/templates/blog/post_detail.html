@@ -74,4 +74,16 @@
         </div>
     </article>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.0/marked.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.content-markdown').each(function(){
+                var content = $(this).text()
+                var markedContent = marked(content)
+                console.log(markedContent)
+                $(this).html(markedContent)
+            })
+        })
+    </script>
 {% endblock %}
