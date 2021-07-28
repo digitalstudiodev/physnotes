@@ -40,11 +40,10 @@
                 {% if comments %}
                     {% for comment in comments %}
                     <div class="col-lg-6">
-                        <div class="card my-3">
-                            <div class="card-body">
-                                <h3>{{ comment.user }}</h3>
+                        <div class="my-3">
+                                <h6>{{ comment.user }}</h6>
                                 <p>{{ comment.comment }}</p>
-                            </div>
+                                <hr />
                         </div>
                     </div>
                     {% endfor %}
