@@ -7,8 +7,8 @@
 
 {% block content %}
 <section class="py-5">
-    <div class="row">
-        <div class="col-lg-6 m-auto">
+    <article class="container">
+        <div class="col-lg-8 m-auto">
             <h1>Delete</h1>
             <form method="POST" class="uniForm">
                 {% csrf_token %}
@@ -22,6 +22,6 @@
                 </div>
             </form>
         </div> 
-    </div> 
+    </article> 
 </section>
 {% endblock %}
