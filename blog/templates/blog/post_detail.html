@@ -76,15 +76,18 @@
 </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.0/marked.min.js"></script>
-<script type="">
+<script>
 window.onload = function(){
-            $('.content-markdown').each(function(){
+            document.getElementsByClassName('content-markdown').each(function(){
                 var content = $(this).text()
                 var markedContent = marked(content)
                 console.log(markedContent)
                 $(this).html(markedContent)
             })
         };
+
+        document.getElementsByClassName('.content-markdown')
+
         /*
         $(document).ready(function(){
             $('.content-markdown').each(function(){
