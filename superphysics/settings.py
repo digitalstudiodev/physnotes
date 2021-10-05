@@ -154,5 +154,7 @@ SECURE_HSTS_SECONDS = 3153600 #1 year
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+
 django_heroku.settings(locals())
 #Digital Studio
