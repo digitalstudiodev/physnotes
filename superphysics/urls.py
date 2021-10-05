@@ -15,6 +15,8 @@ urlpatterns = [
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="users/password_reset/password_reset_complete.html"), name='password_reset_complete'),
 ]
 
+handler404 = 'users.views.invalid_error'
+handler500 = 'users.views.invalid_view'
 
 if settings.DEBUG:
     import debug_toolbar
@@ -22,6 +24,3 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-
-handler404 = 'users.views.invalid_error'
-handler500 = 'users.views.invalid_view'
