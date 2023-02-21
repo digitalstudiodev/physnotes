@@ -21,4 +21,17 @@
         </div> 
     </article> 
 </section>
+<!--markdown form editor-->
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+document.getElementById("id_comment").required = false;
+window.onload = function() {
+    var simplemde = new SimpleMDE(
+        {
+            element: document.getElementById("id_comment"),
+            spellChecker: true,
+        }
+    )
+};
+</script>
 {% endblock %}

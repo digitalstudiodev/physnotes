@@ -67,11 +67,8 @@ document.getElementById("id_content").required = false;
 window.onload = function() {
     var simplemde = new SimpleMDE(
         {
-            autofocus: true,
             element: document.getElementById("id_content"),
             spellChecker: true,
-            toolbar: true,
-            forceSync: true
         }
     )
 };
