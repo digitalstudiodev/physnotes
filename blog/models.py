@@ -19,7 +19,7 @@ class Tag(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     
     def __str__(self):
-        return str("Tag", self.tag_name)
+        return self.tag_name
 
 # Curated Content - Free
 class Post(models.Model):
