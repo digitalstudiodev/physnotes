@@ -6,20 +6,20 @@ from multiselectfield import MultiSelectField
 from PIL import Image
 from .dict_lib import TAG_OPTIONS
 
-# Content Tag - i.e. Nuclear, Optics, Environmental
-class Tag(models.Model):
-    tag_name = models.CharField(max_length=100, default="General")
-    category = models.ForeignKey(User, on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return str("Tag", self.tag_name, "Category", self.category.category_name)
-
 # Data Category - i.e. Physics, Math, Chemistry
 class Category(models.Model):
-    category_name = models.CharField(max_length=100, default="General")
+    category_name = models.CharField(max_length=100, default="")
     
     def __str__(self):
         return self.category_name
+
+# Content Tag - i.e. Nuclear, Optics, Environmental
+class Tag(models.Model):
+    tag_name = models.CharField(max_length=100, default="")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return str("Tag", self.tag_name, "Category", self.category.category_name)
 
 # Curated Content - Free
 class Post(models.Model):
@@ -44,7 +44,7 @@ class Comment(models.Model):
     user = models.CharField(max_length=100, default="", verbose_name="Name")
     comment = models.TextField(default="", verbose_name="Comment")
     date_posted = models.DateTimeField(default=timezone.now)
-    post = models.ForeignKey('Post', default=None, on_delete=models.CASCADE, null=False, blank=False)
+    post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE, null=False, blank=False)
 
     def __str__(self):
         return self.user
@@ -59,7 +59,7 @@ class RSSPost(models.Model):
     content = models.TextField(default="", verbose_name="Content")
     story_link = models.CharField(max_length=5000, default="")
     media_link = models.CharField(max_length=5000, default="")
-    date_posted = models.DateTimeField(default=None)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.title, self.date_posted)
