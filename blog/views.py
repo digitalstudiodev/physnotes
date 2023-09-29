@@ -29,7 +29,7 @@ def category(request, pk):
     list_objs = []
     posts = Post.objects.all()
     tags = Tag.objects.filter(category__pk=pk)
-    posts = posts.filter(tag=tags)
+    posts = posts.filter(tag__in=tags)
     context = {
         'items': posts,
         'category': category
