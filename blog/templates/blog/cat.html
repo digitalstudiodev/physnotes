@@ -14,7 +14,7 @@
             <ul class="list-group list-group-flush">
                 {% for cat in categories %}
                     <li class="list-group-item">
-                        <a href="{% url 'blog:category' cat.id %}" class="text-dark">
+                        <a href="{% url 'blog:category' cat.pk %}" class="text-dark">
                             {{ cat.category_name }}
                         </a>
                     </li>
