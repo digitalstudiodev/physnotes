@@ -14,7 +14,7 @@
             <p class="my-5">
                 Also Available In
                 {% for tag in object.tag %}
-                    <a href="{% url 'blog:category' tag %}">{{ tag }}</a>
+                    <a href="{% url 'blog:category' tag.tag_name %}">{{ tag }}</a>
                 {% endfor %}
             </p>
 
@@ -68,7 +68,7 @@
             <p>
                 Also Available In
                 {% for tag in object.tag %}
-                    <a href="{% url 'blog:category' tag %}">{{ tag }}</a>
+                    <a href="{% url 'blog:category' tag.tag_name %}">{{ tag }}</a>
                 {% endfor %}
             </p>
         </div>
