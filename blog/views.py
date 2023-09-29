@@ -26,15 +26,26 @@ def categories(request):
 
 
 def category(request, pk):
-    list_objs = []
     posts = Post.objects.all()
-    tags = Tag.objects.filter(category__pk=pk)
+    category = ContentCat.objects.filter(pk=pk).first()
+    tags = Tag.objects.filter(category=category)
     posts = posts.filter(tag__in=tags)
     context = {
         'items': posts,
-        'category': category
+        'category': category.category_name,
+        'tag': tags
     }
     return render(request, "blog/cats.html", context)
+
+def tagView(request, pk):
+    posts = Post.objects.all()
+    tag = Tag.objects.filter(pk=pk).first()
+    posts = posts.filter(tag=tag)
+    context = {
+        'items': posts,
+        'tag': tag.tag_name
+    }
+    return render(request, "blog/tags.html", context)
 
 def contact(request):
     return render(request, "blog/contact.html")

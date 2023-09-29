@@ -3,7 +3,7 @@ from .views import (home, PostDetailView,
                     PostCreateView, PostUpdateView, 
                     PostDeleteView, about, 
                     contact, categories,
-                    category,CommentCreateView)
+                    category,CommentCreateView,tagView)
 
 app_name = 'blog'
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('categories/', categories, name='categories'),
     path('category/<int:pk>/', category, name='category'),
+    path('tag/<int:pk>/', tagView, name='tag'),
     path('contact/', contact, name='contact'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('', home, name='home'),

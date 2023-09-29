@@ -6,7 +6,7 @@
 <header class="py-5 bg-light border-bottom mb-4">
     <div class="container">
         <div class="text-center my-5">
-            <h1 class="fw-bolder">{{ category }}</h1>
+            <h1 class="fw-bolder">{{ tag }}</h1>
         </div>
     </div>
 </header>
@@ -16,7 +16,6 @@
 <section class="py-5">
     <div class="container">
         <div class="row">
-            {% include 'blog/tag_btns.html' %}
             {% for item in items %}
             <div class="col-lg-3">
                 <div class="card mb-4">
