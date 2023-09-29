@@ -16,7 +16,7 @@
 <section class="py-5">
     <div class="container">
         <div class="row">
-            {% include 'tag_btns.html' %}
+            {% include 'blog/tag_btns.html' %}
             {% for tag in tags %}
             <div class="badge bg-dark mx-3">
                 <a href="{% url 'blog:tag' tag.pk %}" class="text-white">
