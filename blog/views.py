@@ -28,11 +28,10 @@ def categories(request):
     return render(request, "blog/cat.html", context)
 
 
-def category(request, category):
+def category(request, category_id):
     list_objs = []
     posts = Post.objects.all()
-    category_name = category
-    tags = Tag.objects.filter(contentcat__catgeory_name=category_name)
+    tags = Tag.objects.filter(contentcat=category_id)
     posts = posts.filter(tag=tags)
     context = {
         'items': posts,
