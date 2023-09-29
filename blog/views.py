@@ -33,7 +33,7 @@ def category(request, pk):
     context = {
         'items': posts,
         'category': category.category_name,
-        'tag': tags
+        'tags': tags
     }
     return render(request, "blog/cats.html", context)
 
