@@ -1,4 +1,4 @@
-{% for cat in categories %}
+{% for tag in tags %}
 <div class="badge bg-dark">
     <a href="{% url 'blog:tag' tag.pk %}" class="text-dark">
         {{ tag.tag_name }}
