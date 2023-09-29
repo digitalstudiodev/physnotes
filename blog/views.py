@@ -71,11 +71,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['form'].fields["tag"].initial = forms.CharField(label='Tag Options', widget=forms.Select(choices=Tag.objects.all()))
         return context
-    
-    def __init__(self, **kwargs):
-        self.get_form.tag = forms.CharField(label='Tag Options', widget=forms.Select(choices=Tag.objects.all()))
-        super().__init__(**kwargs)
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
