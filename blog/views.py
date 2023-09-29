@@ -8,7 +8,7 @@ from .models import Post, Comment
 from .forms import CommentForm
 from django import forms
 from django.core.paginator import Paginator
-#from blog.models import ContentCat, Tag
+from blog.models import ContentCat, Tag
 
 def home(request):
     return render(request, "blog/blog.html")
@@ -18,12 +18,10 @@ def about(request):
 
 def categories(request):
     # convert tuple to list of categories
-    """
     categories = ContentCat.objects.all()
     titles = []
     for cat in categories:
-        titles.append(cat.title)"""
-    titles = []
+        titles.append(cat.title)
     context = {
         'categories': titles
     }
@@ -31,14 +29,13 @@ def categories(request):
 
 
 def category(request, category):
-    """
     list_objs = []
     posts = Post.objects.all()
     category_name = category
-    tags = Tag.objects.filter(category__catgeory_name=category_name)
-    posts = posts.filter(tag=tags)"""
+    tags = Tag.objects.filter(contentcat__catgeory_name=category_name)
+    posts = posts.filter(tag=tags)
     context = {
-        'items': [],
+        'items': posts,
         'category': category
     }
     return render(request, "blog/cats.html", context)
