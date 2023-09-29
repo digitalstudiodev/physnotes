@@ -1,7 +1,9 @@
-{% for tag in tags %}
-<div class="badge bg-dark mx-3">
-    <a href="{% url 'blog:tag' tag.pk %}" class="text-white">
-        {{ tag.tag_name }}
-    </a>
-</div>
-{% endfor %}
+<div class="d-flex">   
+    {% for tag in tags %}
+    <div class="badge bg-dark mx-3">
+        <a href="{% url 'blog:tag' tag.pk %}" class="text-white">
+            {{ tag.tag_name }}
+        </a>
+    </div>
+    {% endfor %}
+</div> 
