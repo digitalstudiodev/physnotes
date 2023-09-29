@@ -9,6 +9,8 @@ from .forms import CommentForm
 from django import forms
 from django.core.paginator import Paginator
 from blog.models import ContentCat, Tag
+from django import forms
+
 
 def home(request):
     return render(request, "blog/blog.html")
@@ -68,7 +70,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'].fields['tag'].queryset = Tag.objects.all()
+        context['form'].fields['tag'] = forms.CharField(label='Tag Options', widget=forms.Select(choices=Tag.objects.all()))
         return context
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
