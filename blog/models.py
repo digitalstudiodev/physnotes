@@ -11,7 +11,7 @@ class Category(models.Model):
     category_name = models.CharField(max_length=100, default="")
     
     def __str__(self):
-        return self.category_name
+        return self.id
 
 # Content Tag - i.e. Nuclear, Optics, Environmental
 class Tag(models.Model):
@@ -19,7 +19,7 @@ class Tag(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.tag_name
+        return self.id
 
 # Curated Content - Free
 class Post(models.Model):
