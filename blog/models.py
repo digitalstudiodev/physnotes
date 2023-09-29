@@ -55,7 +55,7 @@ class Comment(models.Model):
 # Data from RSS Feeds    
 class RSS(models.Model):
     title = models.CharField(max_length=100, default=None)
-    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, default=None, null=True)
+    tag = models.ManyToManyField(Tag, default=None, null=True)
     summary = models.CharField(max_length=5000, default=None)
     content = models.TextField(default=None, verbose_name="Content")
     story_link = models.CharField(max_length=5000, default=None)
