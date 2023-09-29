@@ -6,30 +6,34 @@ from multiselectfield import MultiSelectField
 from PIL import Image
 from .dict_lib import TAG_OPTIONS
 
+def get_default(num):
+    return 1
+
+
 # Data Category - i.e. Physics, Math, Chemistry
-class Category(models.Model):
-    category_name = models.CharField(max_length=100, default="")
+class ContentCat(models.Model):
+    category_name = models.CharField(max_length=100, default=None)
     
     def __str__(self):
         return self.category_name
 
 # Content Tag - i.e. Nuclear, Optics, Environmental
 class Tag(models.Model):
-    tag_name = models.CharField(max_length=100, default="")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    tag_name = models.CharField(max_length=100, default=None)
+    category = models.ForeignKey(ContentCat, on_delete=models.CASCADE, default=get_default(2))
     
     def __str__(self):
         return self.tag_name
 
 # Curated Content - Free
 class Post(models.Model):
-    title = models.CharField(max_length=100, default="")
-    preview = models.CharField(max_length=5000, default="")
-    content = models.TextField(default="", verbose_name="Content")
+    title = models.CharField(max_length=100, default=None)
+    preview = models.CharField(max_length=5000, default=None)
+    content = models.TextField(default=None, verbose_name="Content")
     date_posted = models.DateTimeField(default=timezone.now)
     read_time = models.IntegerField(default=5, verbose_name="Read Time", help_text="in minutes")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING)
+    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, default=get_default(1))
     featured_image = models.ImageField(default='default.png', upload_to='blog_pics', verbose_name="Featured Image")
     note = models.FileField(default=None, upload_to='notes', verbose_name="Notes", null=True, blank=True, help_text="(Optional)")
 
@@ -41,8 +45,8 @@ class Post(models.Model):
 
 # User Comment on Curated Content
 class Comment(models.Model):
-    user = models.CharField(max_length=100, default="", verbose_name="Name")
-    comment = models.TextField(default="", verbose_name="Comment")
+    user = models.CharField(max_length=100, default=None, verbose_name="Name")
+    comment = models.TextField(default=None, verbose_name="Comment")
     date_posted = models.DateTimeField(default=timezone.now)
     post = models.ForeignKey(Post, default=None, on_delete=models.CASCADE, null=False, blank=False)
 
@@ -54,13 +58,13 @@ class Comment(models.Model):
     
 # Data from RSS Feeds    
 class RSS(models.Model):
-    title = models.CharField(max_length=100, default="")
-    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING)
-    summary = models.CharField(max_length=5000, default="")
-    content = models.TextField(default="", verbose_name="Content")
-    story_link = models.CharField(max_length=5000, default="")
-    media_link = models.CharField(max_length=5000, default="")
-    date_posted = models.DateTimeField(default=timezone.now)
+    title = models.CharField(max_length=100, default=None)
+    tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING, default=get_default(1))
+    summary = models.CharField(max_length=5000, default=None)
+    content = models.TextField(default=None, verbose_name="Content")
+    story_link = models.CharField(max_length=5000, default=None)
+    media_link = models.CharField(max_length=5000, default=None)
+    date_posted = models.DateTimeField(default=None)
 
     def __str__(self):
         return self.title

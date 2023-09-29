@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Tag, Category, Post, Comment, RSS
+from .models import Post, Comment, RSS, Tag, ContentCat
 
 admin.site.register(Tag)
-admin.site.register(Category)
+admin.site.register(ContentCat)
 admin.site.register(Post)
 admin.site.register(Comment)
 admin.site.register(RSS)
