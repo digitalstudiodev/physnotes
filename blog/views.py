@@ -28,7 +28,7 @@ def categories(request):
 def category(request, pk):
     list_objs = []
     posts = Post.objects.all()
-    tags = Tag.objects.filter(contentcat__pk=pk)
+    tags = Tag.objects.filter(category__pk=pk)
     posts = posts.filter(tag=tags)
     context = {
         'items': posts,
