@@ -73,6 +73,11 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context['form'].fields["tag"].initial = forms.ModelChoiceField(Tag.objects.all(), widget=forms.RadioSelect())
         return context
+    
+    def __init__(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'].fields["tag"].initial = forms.ModelChoiceField(Tag.objects.all(), widget=forms.RadioSelect())
+        return context
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
