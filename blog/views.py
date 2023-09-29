@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render, get_object_or_404, redirect, render
 from users.models import User
 from django.contrib import messages
@@ -70,11 +71,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        tags = []
-        for tag in Tag.objects.all():
-            tags.append(tag.tag_name)
-        context['form'].fields['tag'] = forms.CharField(label='Tag Options', widget=forms.Select(choices=tags))
         return context
+    
+    def __init__(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'].fields['tag'] = forms.CharField(label='Tag Options', widget=forms.Select(choices=Tag.objects.all()))
+        super().__init__(**kwargs)
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
