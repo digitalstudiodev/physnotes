@@ -34,7 +34,7 @@ class Post(models.Model):
     note = models.FileField(default=None, upload_to='notes', verbose_name="Notes", null=True, blank=True, help_text="(Optional)")
 
     def __str__(self):
-        return str(self.title, self.date_posted)
+        return self.title
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'pk': self.pk})
@@ -53,7 +53,7 @@ class Comment(models.Model):
         return reverse('blog:post_detail', kwargs={'pk': self.post.pk})
     
 # Data from RSS Feeds    
-class RSSPost(models.Model):
+class RSS(models.Model):
     title = models.CharField(max_length=100, default="")
     tag = models.ForeignKey(Tag, on_delete=models.DO_NOTHING)
     summary = models.CharField(max_length=5000, default="")
@@ -63,4 +63,4 @@ class RSSPost(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return str(self.title, self.date_posted)
+        return self.title
