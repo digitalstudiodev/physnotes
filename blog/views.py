@@ -21,7 +21,7 @@ def categories(request):
     categories = ContentCat.objects.all()
     titles = []
     for cat in categories:
-        titles.append(cat.title)
+        titles.append(cat.category_name)
     context = {
         'categories': titles
     }
