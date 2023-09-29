@@ -19,11 +19,8 @@ def about(request):
 def categories(request):
     # convert tuple to list of categories
     categories = ContentCat.objects.all()
-    titles = []
-    for cat in categories:
-        titles.append(cat.category_name)
     context = {
-        'categories': titles
+        'categories': categories
     }
     return render(request, "blog/cat.html", context)
 
