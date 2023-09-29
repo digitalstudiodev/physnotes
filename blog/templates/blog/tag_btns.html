@@ -1,6 +1,6 @@
 {% for tag in tags %}
-<div class="badge bg-dark">
-    <a href="{% url 'blog:tag' tag.pk %}" class="text-dark">
+<div class="badge bg-dark mx-3">
+    <a href="{% url 'blog:tag' tag.pk %}" class="text-white">
         {{ tag.tag_name }}
     </a>
 </div>
