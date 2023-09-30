@@ -4,13 +4,13 @@ from users.models import User
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from .models import Post, Comment
 from .forms import CommentForm
 from django import forms
 from django.core.paginator import Paginator
 from blog.models import ContentCat, Tag
-from django import forms
+from .forms import PostForm
 
 
 def home(request):
@@ -61,23 +61,14 @@ class PostDetailView(DetailView):
         context['comments'] = Comment.objects.filter(post=self.object)
         return context
 
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = ['title', 'preview', 'read_time', 'content' ,'tag', 'featured_image','note']
+class PostCreateView(LoginRequiredMixin, FormView):
+    template_name="blog/post_form.html"
+    form_class=PostForm
+    success_url="/users/profile/"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'].fields["tag"].initial = forms.ModelChoiceField(Tag.objects.all(), widget=forms.RadioSelect())
-        return context
-    
-    def __init__(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'].fields["tag"].initial = forms.ModelChoiceField(Tag.objects.all(), widget=forms.RadioSelect())
-        return context
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post

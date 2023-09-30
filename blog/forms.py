@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment
+from .models import Comment, Post, Tag
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -7,3 +7,12 @@ class CommentForm(forms.ModelForm):
         fields = [
             'user', 'comment'
         ]
+    
+
+class PostForm(forms.Model):
+    class Meta:
+        model = Post
+        fields = ['title', 'preview', 'read_time', 'content' ,'tag', 'featured_image','note']
+        widgets = {
+            'tag': forms.MultipleChoiceField(required=True,widget=forms.CheckboxSelectMultiple,choices=Tag.objects.all(),)
+        }
