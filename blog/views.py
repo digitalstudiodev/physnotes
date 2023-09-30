@@ -71,10 +71,14 @@ class PostCreateView(LoginRequiredMixin, FormView):
         form.instance.save()
         print(form.instance.pk)
         if self.request.POST:
-            tags = self.request.POST['tag']
+            tags, tag_objs = self.request.POST['tag'], []
             for i in tags:
-                print(i)
-                form.instance.tag.set(Tag.objects.all().filter(pk=i).first())
+                try:
+                    tag_objs.append(Tag.objects.all().filter(pk=i).first())
+                except:
+                    pass
+            form.instance.tag.set(tag_objs)
+            form.instance.save()
         return super().form_valid(form)
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
