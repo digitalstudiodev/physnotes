@@ -13,7 +13,9 @@
             <h1 class="font-weight-bold text-center">{{ object.title }}</h1>
             <p class="my-5">
                 Also Available In
-                {{ tags }}
+                {% for tag in tags %}
+                    <a href="{% url 'blog:tag' tag.pk %}" class="mx-3">{{ tag.tag_name }}</a>&nbsp;|&nbsp;
+                {% endfor %}
             </p>
 
             <img src="{{ object.featured_image.url }}" class="img-fluid m-auto mb-5" max-width="850px" max-height="350px" alt="{{ object.title }} Featured Image" >
