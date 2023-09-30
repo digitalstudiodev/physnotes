@@ -60,7 +60,8 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.filter(post=self.object)
         tag_objects = []
-        for i in self.object.tag:
+        print(list(self.object.tag))
+        for i in list(self.object.tag):
             try:
                 tag_objects.append(Tag.objects.all().filter(pk=i.pk).first())
             except:
