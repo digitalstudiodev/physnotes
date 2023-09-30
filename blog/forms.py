@@ -18,5 +18,5 @@ class PostForm(forms.ModelForm):
         for tag in Tag.objects.all():
             tag_names.append(tag.tag_name)
         widgets = {
-            'tag': forms.MultipleChoiceField( required=True, widget=forms.RadioSelect(), choices=Tag.objects.all())
+            'tag': forms.MultipleChoiceField( required=True, widget=forms.RadioSelect(), choices=Tag.objects.all(), to_field_name=tag_names)
         }
