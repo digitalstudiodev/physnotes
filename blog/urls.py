@@ -8,16 +8,15 @@ from .views import (home, PostDetailView,
 app_name = 'blog'
 
 urlpatterns = [
+    path('', home, name='home'),
     path('about/', about, name='about'),
+    path('contact/', contact, name='contact'),
     path('categories/', categories, name='categories'),
     path('category/<int:pk>/', category, name='category'),
-    path('tag/<int:pk>/', tagView, name='tag'),
-    path('contact/', contact, name='contact'),
+    path('category/tag/<int:pk>/', tagView, name='tag'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
-    path('', home, name='home'),
     path('post/new/', PostCreateView.as_view(), name='post_create'),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post_update'),
     path('post/<int:pk>/delete', PostDeleteView.as_view(), name='post_delete'),
-    #
     path('post/<int:pk>/add_comment', CommentCreateView.as_view(), name="add_comment")
 ]
