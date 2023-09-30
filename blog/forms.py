@@ -14,9 +14,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'preview', 'read_time', 'content' ,'tag', 'featured_image','note']
-        tag_names= []
-        for tag in Tag.objects.all():
-            tag_names.append(tag.tag_name)
+
         widgets = {
-            'tag': forms.CharField(required=True, widget=forms.SelectMultiple(), choices=Tag.objects.all())
+            'tag': forms.CharField(required=True, widget=forms.SelectMultiple(choices=tuple(list(Tag.objects.all()))), choices=Tag.objects.all())
         }
