@@ -14,5 +14,5 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'preview', 'read_time', 'content' ,'tag', 'featured_image','note']
         widgets = {
-            'tag': forms.MultipleChoiceField(required=True,widget=forms.CheckboxSelectMultiple,choices=Tag.objects.all(),)
+            'tag': forms.ModelChoiceField(required=True,widget=forms.CheckboxSelectMultiple,choices=Tag.objects.all(),)
         }
