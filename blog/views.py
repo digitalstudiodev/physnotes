@@ -72,6 +72,7 @@ class PostCreateView(LoginRequiredMixin, FormView):
             tags = self.request.POST['tag']
             tag_objs = []
             for tag in tags:
+                print(tag)
                 tag_objs.append(Tag.objects.get(pk=int(tag)))
             form.instance.tag.set(tag_objs)
         return super().form_valid(form)
