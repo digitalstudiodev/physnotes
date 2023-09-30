@@ -14,7 +14,7 @@
             <p class="my-5">
                 Also Available In
                 {% for tag in tags %}
-                    <a href="{% url 'blog:tag' tag.pk %}" class="mx-3">{{ tag.tag_name }}</a>&nbsp;|&nbsp;
+                    <a href="{% url 'blog:tag' tag.pk %}" class="mx-3">{{ tag.tag_name }}</a>&nbsp;
                 {% endfor %}
             </p>
 
@@ -67,7 +67,9 @@
             {% endif %}
             <p>
                 Also Available In
-                {{ tags }}
+                {% for tag in tags %}
+                    <a href="{% url 'blog:tag' tag.pk %}" class="mx-3">{{ tag.tag_name }}</a>&nbsp;
+                {% endfor %}
             </p>
         </div>
     </article>
