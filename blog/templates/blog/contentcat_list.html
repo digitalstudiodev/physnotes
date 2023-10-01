@@ -29,8 +29,8 @@
                 {% for tag in tags %}
                     {% for x in tag.category.all %}
                         {% if x.pk == obj.pk %}
-                        <div class="">
-                            {{ tag.tag_name }}
+                        <div class="ml-10">
+                            {{ tag.tag_name }} &nbsp;&nbsp;<i class="bi bi-arrow-right-short"></i>&nbsp;&nbsp;<a href="{% url 'blog:tag_update' tag.pk %}">Update</a> <a href="{% url 'blog:tag_delete' tag.pk %}">Delete</a>
                         </div>
                         {% endif %}
                     {% endfor %}
