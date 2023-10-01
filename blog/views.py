@@ -148,9 +148,6 @@ class CategoryCreateView(LoginRequiredMixin, FormView):
     model = ContentCat
     fields = ['category_name']
 
-    def form_valid(self, form):
-        return super().form_valid(form)
-
 class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ContentCat
 
