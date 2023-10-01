@@ -156,10 +156,6 @@ class CategoryCreateView(LoginRequiredMixin, FormView):
         else:
             return messages.info("Category Already Exists, Rename Category")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
 class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ContentCat
 
