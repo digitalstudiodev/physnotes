@@ -150,11 +150,12 @@ class CategoryCreateView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         categories = ContentCat.objects.all()
-        matched = categories.filter(category_name=form.instance.category_name)
-        if len(matched) == 0:
-            return super().form_valid(form)
-        else:
-            return messages.info("Category Already Exists, Rename Category")
+        if self.request.POST:
+            matched = categories.filter(category_name=self.request.POST['category_name'])
+            if len(matched) == 0:
+                return super().form_valid(form)
+            else:
+                return messages.info("Category Already Exists, Rename Category")
 
 class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ContentCat
