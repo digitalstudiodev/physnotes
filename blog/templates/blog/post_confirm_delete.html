@@ -17,8 +17,8 @@
                     <h2>{{ object.title }}</h2>
                 </fieldset>
                 <div class="form-group">
-                    <button class="btn btn-danger btn-marketing btn-block rounded-pill mt-4" type="submit">Yes, Delete</button>
                     <a class="btn btn-primary btn-marketing btn-block rounded-pill mt-4" href="{% url 'blog:post_detail' object.id %}">Cancel</a>
+                    <button class="btn btn-danger btn-marketing btn-block rounded-pill mt-4" type="submit">Yes, Delete</button>
                 </div>
             </form>
         </div> 

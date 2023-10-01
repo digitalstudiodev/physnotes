@@ -14,8 +14,8 @@
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="my-5">
-                    <button class="btn btn-success rounded-pill" type="submit">Comment</button>
                     <a class="btn btn-danger rounded-pill ml-3" href="{% url 'blog:post_detail' post_id %}">Cancel</a>
+                    <button class="btn btn-success rounded-pill" type="submit">Comment</button>
                 </div>
             </form>
         </div> 
