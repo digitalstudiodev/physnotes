@@ -154,7 +154,8 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
         if len(matched) == 0:
             return super().form_valid(form)
         else:
-            return messages.info(self.request, "Category Already Exists, Rename Category")
+            messages.info(self.request, "Category Already Exists, Rename Category")
+            return redirect('blog:catgeory_create')
 
 class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ContentCat
