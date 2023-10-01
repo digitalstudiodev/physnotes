@@ -25,9 +25,9 @@
             <hr />
             {% for obj in object_list %}
             <div class="d-flex mb-4">
-                <div class="ml-3">
+                <h3>
                     {{ obj.category_name }} <i class="bi bi-arrow-right-short"></i>&nbsp;&nbsp;<a href="{% url 'blog:category_update' obj.pk %}">Update</a> <a href="{% url 'blog:category_delete' obj.pk %}">Delete</a>
-                </div>
+                </h3>
             </div>
             <table class="table table-striped" style="width:100%" id="{{ obj.pk }}">
                 <thead>
