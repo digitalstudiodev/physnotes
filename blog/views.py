@@ -211,7 +211,7 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
         if self.request.POST:
             # get category keys
             print(self.request.POST)
-            categories = list(self.request.POST.category)
+            categories = list(self.request.POST.get('category'))
             category_objs = []
             # use category keys to get list of category objects
             print(categories)
