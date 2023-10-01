@@ -46,7 +46,7 @@ def tagView(request, pk):
     posts = posts.filter(tag=tag)
     context = {
         'items': posts,
-        'tag': tag.tag_name
+        'tag': tag
     }
     return render(request, "blog/tags.html", context)
 
