@@ -210,7 +210,6 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
     success_url="/users/profile/"
 
     def form_valid(self, form):
-        form.instance.id = form.instance.pk
         if self.request.POST:
             categories, category_objs = self.request.POST['category'], []
             for i in categories:
@@ -218,7 +217,7 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
                     category_objs.append(ContentCat.objects.all().filter(pk=i).first())
                 except:
                     pass
-            form.instance.category.set(category_objs)
+            form.instance.category.add(category_objs)
             form.instance.save()
         return super().form_valid(form)
     
