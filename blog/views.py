@@ -225,6 +225,11 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
     def test_func(self):
         return True
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'].fields['tag_name'] = Tag.objects.all().filter(pk=self.kwargs['pk']).first().tag_name
+        return context
+
 class TagDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Tag
     success_url = '/users/profile/'
