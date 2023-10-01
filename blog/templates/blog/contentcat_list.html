@@ -26,6 +26,15 @@
                     {{ obj.category_name }} <i class="bi bi-arrow-right-short"></i>&nbsp;&nbsp;<a href="{% url 'blog:category_update' obj.pk %}">Update</a> <a href="{% url 'blog:category_delete' obj.pk %}">Delete</a>
                 </div>
             </div>
+                {% for tag in tags %}
+                    {% for x in tag.category.all() %}
+                        {% if x.pk == ob.pk %}
+                        <div class="">
+                            {{ tag.tag_name }}
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
             {% endfor %}
         </div> 
     </article> 
