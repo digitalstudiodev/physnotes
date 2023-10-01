@@ -26,8 +26,10 @@
             {% for obj in object_list %}
             <div class="d-flex mb-4">
                 <h3>
-                    {{ obj.category_name }} <i class="bi bi-arrow-right-short"></i>&nbsp;&nbsp;<a href="{% url 'blog:category_update' obj.pk %}">Update</a> <a href="{% url 'blog:category_delete' obj.pk %}">Delete</a>
+                    {{ obj.category_name }}
                 </h3>
+                <<a href="{% url 'blog:category_update' obj.pk %}" class="badge bg-dark text-white">Update</a> 
+                <a href="{% url 'blog:category_delete' obj.pk %}" class="badge bg-dark text-white">Delete</a>
             </div>
             <table class="table table-striped" style="width:100%" id="{{ obj.pk }}">
                 <thead>
