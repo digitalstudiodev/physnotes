@@ -9,9 +9,9 @@
             <h1 class="fw-bolder">{{ tag.tag_name }}</h1>
         </div>
         <div class="d-flex">
-            <p>
-                {{ tag.category }}
-            </p>
+            {% for category in categories %}
+            <a href="{% url 'blog:category' category.pk %}" class="mr-3">{{ category.category_name }}</a>
+            {% endfor %}
         </div>
     </div>
 </header>

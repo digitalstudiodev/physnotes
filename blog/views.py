@@ -44,10 +44,10 @@ def tagView(request, pk):
     posts = Post.objects.all()
     tag = Tag.objects.filter(pk=pk).first()
     posts = posts.filter(tag=tag)
-    print(tag.category.all())
     context = {
         'items': posts,
-        'tag': tag
+        'tag': tag,
+        'categories': tag.category.all()
     }
     return render(request, "blog/tags.html", context)
 
