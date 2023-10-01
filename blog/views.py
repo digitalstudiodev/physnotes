@@ -44,7 +44,7 @@ def tagView(request, pk):
     posts = Post.objects.all()
     tag = Tag.objects.filter(pk=pk).first()
     posts = posts.filter(tag=tag)
-    print(tag.catgeory)
+    print(tag.category)
     context = {
         'items': posts,
         'tag': tag
