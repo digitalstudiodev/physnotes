@@ -216,10 +216,9 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
             # get post object  
             tag_obj = Tag.objects.all().filter(tag_name=self.request.POST['tag_name']).first()
             # use category keys to get list of category objects
-            for i in range(len(self.request.POST['category'])):
-                print(self.request.POST['category'][i])
-                category_objs.append(ContentCat.objects.all().filter(pk=int(self.request.POST['category'][i])).first())
-                print(ContentCat.objects.all().filter(pk=int(self.request.POST['category'][i])).first())
+            for i in range(len(categories)):
+                print(categories[i])
+                category_objs.append(ContentCat.objects.get(pk=int(categories[i])))
             # set the tag categories to the new category list
             print(category_objs)
             tag_obj.category.clear()
