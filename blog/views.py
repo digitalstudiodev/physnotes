@@ -221,6 +221,9 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
             form.instance.category.set(category_objs)
             form.instance.save()
         return super().form_valid(form)
+    
+    def test_func(self):
+        return True
 
 class TagDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Tag
