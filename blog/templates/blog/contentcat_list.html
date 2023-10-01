@@ -29,15 +29,31 @@
                     {{ obj.category_name }} <i class="bi bi-arrow-right-short"></i>&nbsp;&nbsp;<a href="{% url 'blog:category_update' obj.pk %}">Update</a> <a href="{% url 'blog:category_delete' obj.pk %}">Delete</a>
                 </div>
             </div>
-                {% for tag in tags %}
-                    {% for x in tag.category.all %}
-                        {% if x.pk == obj.pk %}
-                        <div class="ml-10">
-                            {{ tag.tag_name }} &nbsp;&nbsp;<i class="bi bi-arrow-right-short"></i>&nbsp;&nbsp;<a href="{% url 'blog:tag_update' tag.pk %}">Update</a> <a href="{% url 'blog:tag_delete' tag.pk %}">Delete</a>
-                        </div>
-                        {% endif %}
+            <table class="table table-striped" style="width:100%" id="{{ obj.pk }}">
+                <thead>
+                    <tr>
+                        <th>Tag Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tag in tags %}
+                        {% for x in tag.category.all %}
+                            {% if x.pk == obj.pk %}
+                            <tr>
+                                <td>{{ tag.tag_name }}</td> 
+                                <td><a href="{% url 'blog:tag_update' tag.pk %}">Update</a> </td>
+                                <td><a href="{% url 'blog:tag_delete' tag.pk %}">Delete</a> </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
+                </tbody>
+            </table>
+            <script>
+                new DataTable('#{{ obj.pk }}');
+            </script>
             {% endfor %}
         </div> 
     </article> 
