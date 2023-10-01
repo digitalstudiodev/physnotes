@@ -24,12 +24,20 @@
             </div>
             <hr />
             {% for obj in object_list %}
-            <div class="d-flex mb-4">
+            <div class="col-lg-8">
                 <h3>
                     {{ obj.category_name }}
                 </h3>
-                <<a href="{% url 'blog:category_update' obj.pk %}" class="badge bg-dark text-white">Update</a> 
-                <a href="{% url 'blog:category_delete' obj.pk %}" class="badge bg-dark text-white">Delete</a>
+                <div class="d-flex mb-4">
+                    <div class="mx-3">
+                        <a href="{% url 'blog:category_update' obj.pk %}" class="badge bg-dark text-white">Update</a> 
+                    </div>
+                </div>
+                <div class="d-flex mb-4">
+                    <div class="mx-3">
+                        <a href="{% url 'blog:category_delete' obj.pk %}" class="badge bg-dark text-white">Delete</a>
+                    </div>
+                </div>
             </div>
             <table class="table table-striped" style="width:100%" id="{{ obj.pk }}">
                 <thead>
