@@ -209,6 +209,7 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
     def form_valid(self, form):
         if self.request.POST:
             # get category keys
+            print(self.request.POST)
             categories = self.request.POST['category']
             print(categories)
             # get post object  
