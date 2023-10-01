@@ -193,6 +193,7 @@ class TagCreateView(LoginRequiredMixin, FormView):
     success_url="/users/profile/"
 
     def form_valid(self, form):
+        form.instance.save()
         if self.request.POST:
             categories = self.request.POST['category']
             category_objs = list(ContentCat.objects.all().filter(pk__in=categories))
@@ -214,6 +215,8 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
             # use category keys to get list of category objects
             category_objs = list(ContentCat.objects.all().filter(pk__in=categories))
             # set the tag categories to the new category list
+            print(category_objs)
+            tag_obj.category.clear()
             tag_obj.category.set(category_objs)
             # save the tag with new info
             tag_obj.save()
