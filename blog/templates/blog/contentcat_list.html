@@ -18,6 +18,9 @@
                 <div class="ml-3">
                     <a href="{% url 'blog:category_create' %}">New Category</a>
                 </div>
+                <div class="ml-3">
+                    <a href="{% url 'blog:tag_create' %}">New Tag</a>
+                </div>
             </div>
             <hr />
             {% for obj in object_list %}
