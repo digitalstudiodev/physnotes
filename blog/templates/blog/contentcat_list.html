@@ -54,7 +54,14 @@
                                 <td><a href="{% url 'blog:tag_update' tag.pk %}">Update</a> </td>
                                 <td><a href="{% url 'blog:tag_delete' tag.pk %}">Delete</a> </td>
                             </tr>
+                            {% else %}
+                            <tr>
+                                <td>
+                                    None
+                                </td>
+                            </tr>
                             {% endif %}
+
                         {% endfor %}
                     {% endfor %}
                 </tbody>
