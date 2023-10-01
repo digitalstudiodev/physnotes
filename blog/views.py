@@ -154,7 +154,7 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
         if len(matched) == 0:
             return super().form_valid(form)
         else:
-            return messages.info("Category Already Exists, Rename Category")
+            return messages.info(self.request, "Category Already Exists, Rename Category")
 
 class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ContentCat
@@ -167,7 +167,7 @@ class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if len(matched) == 0:
             return super().form_valid(form)
         else:
-            return messages.info("Category Already Exists, Rename Category")
+            return messages.info(self.request, "Category Already Exists, Rename Category")
 
     def test_func(self):
         category = self.get_object()
