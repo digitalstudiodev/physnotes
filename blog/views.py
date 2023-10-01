@@ -210,7 +210,7 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
     success_url="/users/profile/"
 
     def form_valid(self, form):
-        form.instance.save()
+        form.instance.id = form.instance.pk
         if self.request.POST:
             categories, category_objs = self.request.POST['category'], []
             for i in categories:
