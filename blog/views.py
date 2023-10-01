@@ -195,8 +195,9 @@ class TagCreateView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         form.instance.save()
         if self.request.POST:
-            categories = self.request.POST['category']
-            category_objs = list(ContentCat.objects.all().filter(pk__in=categories))
+            categories, category_objs = self.request.POST['category'], []
+            for category in categories:
+                category_objs.append(ContentCat.objects.all().filter(pk=category).first())
             form.instance.category.set(category_objs)
             form.instance.save()
         return super().form_valid(form)
