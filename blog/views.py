@@ -205,19 +205,22 @@ class TagCreateView(LoginRequiredMixin, FormView):
             form.instance.save()
         return super().form_valid(form)
 
-class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Tag
-
-    fields = ['category_name']
+class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
+    template_name="blog/tag_form.html"
+    form_class=TagForm
+    success_url="/users/profile/"
 
     def form_valid(self, form):
-        tags = Tag.objects.all()
-        matched = tags.filter(tag_name=form.instance.tag_name)
-        if len(matched) == 0:
-            return super().form_valid(form)
-        else:
-            messages.info(self.request, "Tag Already Exists, Please Choose Another Name")
-            return redirect('blog:category_list')
+        if self.request.POST:
+            categories, category_objs = self.request.POST['category'], []
+            for i in categories:
+                try:
+                    category_objs.append(ContentCat.objects.all().filter(pk=i).first())
+                except:
+                    pass
+            form.instance.category.set(category_objs)
+            form.instance.save()
+        return super().form_valid(form)
 
     def test_func(self):
         category = self.get_object()
