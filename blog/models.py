@@ -13,6 +13,9 @@ class ContentCat(models.Model):
     def __str__(self):
         return self.category_name
 
+    def get_absolute_url(self):
+        return reverse('blog:category_list')
+
 # Content Tag - i.e. Nuclear, Optics, Environmental
 class Tag(models.Model):
     tag_name = models.CharField(max_length=100, default=None)

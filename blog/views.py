@@ -177,7 +177,7 @@ class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class CategoryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = ContentCat
-    success_url = 'users/profile/'
+    success_url = '/users/profile/'
 
     def test_func(self):
         category = self.get_object()
