@@ -214,7 +214,9 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
             categories = self.request.POST['category']
             print(self.request.POST)
             print(form.instance.pk)
-            form.instance.category.add(ContentCat.objects.all().filter(pk__in=categories))
+            category_objs = ContentCat.objects.all().filter(pk__in=categories)
+            for obj in category_objs:
+                form.instance.category.add(obj)
             form.instance.save()
         return super().form_valid(form)
     
