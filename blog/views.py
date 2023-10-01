@@ -222,12 +222,6 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
             form.instance.save()
         return super().form_valid(form)
 
-    def test_func(self):
-        category = self.get_object()
-        if category:
-            return True
-        return False
-
 class TagDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Tag
     success_url = '/users/profile/'
