@@ -144,9 +144,17 @@ class CategoryListView(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
-class CategoryCreateView(LoginRequiredMixin, FormView):
+class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = ContentCat
     fields = ['category_name']
+
+    def form_valid(self, form):
+        categories = ContentCat.objects.all()
+        matched = categories.filter(category_name=form.instance.category_name)
+        if len(matched) == 0:
+            return super().form_valid(form)
+        else:
+            return messages.info("Category Already Exists, Rename Category")
 
 class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ContentCat
