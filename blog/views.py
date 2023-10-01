@@ -194,12 +194,8 @@ class TagCreateView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         if self.request.POST:
-            categories, category_objs = self.request.POST['category'], []
-            for i in categories:
-                try:
-                    category_objs.append(ContentCat.objects.all().filter(pk=i).first())
-                except:
-                    pass
+            categories = self.request.POST['category']
+            category_objs = list(ContentCat.objects.all().filter(pk__in=categories))
             form.instance.category.set(category_objs)
             form.instance.save()
         return super().form_valid(form)
@@ -211,13 +207,15 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
 
     def form_valid(self, form):
         if self.request.POST:
+            # get category keys
             categories = self.request.POST['category']
+            # get post object  
             tag_obj = Tag.objects.all().filter(tag_name=self.request.POST['tag_name']).first()
-            category_objs = ContentCat.objects.all().filter(pk__in=categories)
-            for i in tag_obj.category.all():
-                tag_obj.category.remove(i)
-            for x in category_objs:
-                tag_obj.category.add(x)
+            # use category keys to get list of category objects
+            category_objs = list(ContentCat.objects.all().filter(pk__in=categories))
+            # set the tag categories to the new category list
+            tag_obj.category.set(category_objs)
+            # save the tag with new info
             tag_obj.save()
         return super().form_valid(form)
     
