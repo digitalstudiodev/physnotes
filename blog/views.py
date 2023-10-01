@@ -212,7 +212,7 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
             # get category keys
             form_request = dict(self.request.POST)
             print(form_request)
-            categories = list(form_request.category)
+            categories = list(form_request['category'])
             category_objs = []
             # use category keys to get list of category objects
             print(categories)
