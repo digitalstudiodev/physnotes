@@ -28,7 +28,7 @@
             </div>
                 {% for tag in tags %}
                     {% for x in tag.category.all %}
-                        {% if x.pk == ob.pk %}
+                        {% if x.pk == obj.pk %}
                         <div class="">
                             {{ tag.tag_name }}
                         </div>
