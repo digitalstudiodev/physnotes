@@ -76,7 +76,6 @@ class PostCreateView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         form.instance.save()
-        print(form.instance.pk)
         if self.request.POST:
             tags, tag_objs = self.request.POST['tag'], []
             for i in tags:
@@ -211,6 +210,7 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
     success_url="/users/profile/"
 
     def form_valid(self, form):
+        form.instance.save()
         if self.request.POST:
             categories, category_objs = self.request.POST['category'], []
             for i in categories:
