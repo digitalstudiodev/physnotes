@@ -1,0 +1,43 @@
+{% extends "users/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<section class="py-5">
+    <article class="container format-standard">
+        <div class="col-lg-8 m-auto">
+            <h3>Category</h3>
+            <form method="POST" class="uniForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {{ form.category_name|as_crispy_field }}
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-danger rounded-pill mt-4" type="submit">Submit</button>
+                            <a class="btn btn-dark rounded-pill mt-4" href="{% url 'users:profile' %}">Back to Profile</a>
+                        </div>
+            </form>
+        </div> 
+    </div>
+</section>
+<!--markdown form editor-->
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+document.getElementById("id_content").required = false;
+window.onload = function() {
+    var simplemde = new SimpleMDE(
+        {
+            element: document.getElementById("id_content"),
+            spellChecker: true,
+        }
+    )
+};
+</script>
+{% endblock %}

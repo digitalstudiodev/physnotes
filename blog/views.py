@@ -135,3 +135,56 @@ class CommentDeleteView(DeleteView):
         if post:
             return True
         return False
+    
+# Category Views
+class CategoryListView(ListView):
+    model = ContentCat
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+class CategoryCreateView(LoginRequiredMixin, FormView):
+    model = ContentCat
+    fields = ['category_name']
+
+    def form_valid(self, form):
+        categories = ContentCat.objects.all()
+        matched = categories.filter(category_name=form.instance.category_name)
+        if len(matched) == 0:
+            return super().form_valid(form)
+        else:
+            return messages.info("Category Already Exists, Rename Category")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+class CategoryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ContentCat
+
+    fields = ['category_name']
+
+    def form_valid(self, form):
+        categories = ContentCat.objects.all()
+        matched = categories.filter(category_name=form.instance.category_name)
+        if len(matched) == 0:
+            return super().form_valid(form)
+        else:
+            return messages.info("Category Already Exists, Rename Category")
+
+    def test_func(self):
+        category = self.get_object()
+        if category:
+            return True
+        return False
+
+class CategoryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = ContentCat
+    success_url = 'users/profile/'
+
+    def test_func(self):
+        category = self.get_object()
+        if category:
+            return True
+        return False

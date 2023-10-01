@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Post, Tag
+from .models import Comment, Post, Tag, ContentCat
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -17,4 +17,14 @@ class PostForm(forms.ModelForm):
 
         widgets = {
             'tag': forms.SelectMultiple(choices=tuple(list(Tag.objects.all())))
+        }
+
+class TagForm(forms.ModelForm):
+    
+    class Meta:
+        model = Tag
+        fields = ['tag_name', 'category']
+
+        widgets = {
+            'category': forms.SelectMultiple(choices=tuple(list(ContentCat.objects.all())))
         }
