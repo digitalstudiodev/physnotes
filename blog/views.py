@@ -227,8 +227,12 @@ class TagUpdateView(LoginRequiredMixin, UserPassesTestMixin, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        categories = Tag.objects.all().filter(pk=self.kwargs['pk']).first().category.all()
+        category_pks = []
+        for category in categories:
+            category_pks.append(category.pk)
         context['form'].fields['tag_name'].initial = str(Tag.objects.all().filter(pk=self.kwargs['pk']).first().tag_name)
-        context['form'].fields['category'].initial = str(Tag.objects.all().filter(pk=self.kwargs['pk']).first().category.all())
+        context['form'].fields['category'].initial = category_pks
         return context
 
 class TagDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
